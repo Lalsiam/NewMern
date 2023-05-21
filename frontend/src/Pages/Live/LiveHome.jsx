@@ -9,9 +9,9 @@ import Navbar from "../../components/Live/Navbar";
 
 const Home = () => {
 
-  // useEffect(() => {
-  //    window.location.reload(true)
-  // }, []);
+    // useEffect(() => {
+    // window.location.reload(true)
+   //}, []);
   
   const [RoomCode, setRoomCode] = useState("");
   const navigate = useNavigate();

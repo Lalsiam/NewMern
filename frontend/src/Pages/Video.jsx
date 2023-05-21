@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
-
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-
 import Comment from "../components/Video/Comments";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -16,7 +12,6 @@ import { subscription } from "../redux/userSlice";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import Recommendation from "../components/Video/Recommendation";
-
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../utils/Theme";
 import Menu from "../components/Video/Menu";
@@ -175,27 +170,27 @@ const Video = () => {
   return (
     <>
    
-    <Container>
+   <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} controls />
+          <VideoFrame src={currentVideo && currentVideo.videoUrl} controls />
         </VideoWrapper>
-        <Title>{currentVideo.title}</Title>
+        <Title>{currentVideo && currentVideo.title}</Title>
         <Details>
           <Info>
-            {currentVideo.views} views • {format(currentVideo.createdAt)}
+            {currentVideo && currentVideo.views} views • {format(currentVideo && currentVideo.createdAt)}
           </Info>
           <Buttons>
             <Button onClick={handleLike}>
-              {currentVideo.likes?.includes(currentUser?._id) ? (
+              {currentVideo && currentVideo.likes?.includes(currentUser?._id) ? (
                 <FavoriteSharpIcon />
               ) : (
                 <FavoriteBorderSharpIcon />
               )}{" "}
-              {currentVideo.likes?.length}
+              {currentVideo && currentVideo.likes?.length}
             </Button>
             <Button onClick={handleDislike}>
-              {currentVideo.dislikes?.includes(currentUser?._id) ? (
+              {currentVideo && currentVideo.dislikes?.includes(currentUser?._id) ? (
                 <ThumbDownIcon />
               ) : (
                 <ThumbDownOffAltOutlinedIcon />
@@ -212,7 +207,7 @@ const Video = () => {
             <ChannelDetail>
               <ChannelName>{channel.name}</ChannelName>
               <ChannelCounter>{channel.subscribers}</ChannelCounter>
-              <Description>{currentVideo.desc}</Description>
+              <Description>{currentVideo && currentVideo.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
           <Subscribe onClick={handleSub}>
@@ -222,9 +217,9 @@ const Video = () => {
           </Subscribe>
         </Channel>
         <Hr />
-        <Comment videoId={currentVideo._id} />
+        <Comment videoId={currentVideo && currentVideo._id} />
       </Content>
-      <Recommendation tags={currentVideo.tags} />
+      <Recommendation tags={currentVideo && currentVideo.tags} />
     </Container>
     </>
   );
