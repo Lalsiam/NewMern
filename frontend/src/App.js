@@ -8,8 +8,9 @@ import Chatpage from "./Pages/Chatpage";
 import Blogpage from "./Pages/Blogfolder/Bloghome/Bloghome";
 import Single from "./Pages/Blogfolder/Single/Single";
 import Write from "./Pages/Blogfolder/Write/Write";
-import Chakra from "./Pages/Chakra.tsx";
+
 import Live from "./Pages/Live/LiveHome";
+import Room from "./Pages/Live/Room";
 
 function App() {
   return (
@@ -29,9 +30,10 @@ function App() {
         <Route path="/blogpage" element={<Blogpage />} />
 
         <Route path="/write" element={<Write />} />
-        <Route path="/chakra" element={<Chakra />} />
+        
         <Route path="/post/:postId" element={<Single />} />
         <Route path="/Live" element={<Live />} />
+        <Route path="/room/:roomID" element={<Room />} />
       </Route>
     </Routes>
   );
