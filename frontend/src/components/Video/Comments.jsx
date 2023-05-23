@@ -32,8 +32,14 @@ const Comments = ({ videoId }) => {
 
 
   const { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
 
   const [comments, setComments] = useState([]);
+
+  const handleComment= async(desc, videoId)=>{
+    const res = await axios.post("/api/comments", {desc, videoId});
+    res.status === 200 && console.log("hello done")
+  }
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -47,10 +53,19 @@ const Comments = ({ videoId }) => {
 
   return (
     <Container>
+      <form onSubmit={(e)=>{
+        e.preventDefault()
+        
+        handleComment(e.target[0].value,currentVideo._id )
+        window.location.reload(true);
+        
+
+      }}>
       <NewComment>
         <Avatar src={currentUser.pic} />
         <Input placeholder="Add a comment..." />  {/* add comment here */}
       </NewComment>
+      </form>
       {comments.map(comment=>(
         <Comment key={comment._id} comment={comment}/>
       ))}

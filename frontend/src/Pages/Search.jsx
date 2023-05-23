@@ -22,11 +22,13 @@ const Search = () => {
     fetchVideos();
   }, [query]);
 
-  return <Container>
+  return (
+  <Container>
     {videos.map(video=>(
       <Card key={video._id} video={video}/>
     ))}
-  </Container>;
+  </Container>
+  )
 };
 
 export default Search;
