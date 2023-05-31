@@ -48,7 +48,7 @@ export default function Topbar() {
         p="5px 10px 5px 10px"
         borderWidth="5px"
       >
-        {window.location.pathname == "/blogpage" ? (
+        {window.location.pathname === "/blogpage" ? (
           <Tooltip label="Create a blog" hasArrow placement="bottom-end">
             <Link className="link" to="/write">
               Write <EditIcon />

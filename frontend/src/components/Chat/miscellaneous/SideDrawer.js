@@ -1,6 +1,26 @@
 import { useState } from "react";
 import { ChatState } from "../../../Context/ChatProvider";
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Input,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Spinner,
+  Text,
+  Tooltip,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import ProfileModal from "./ProfileModal";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +30,7 @@ import UserListItem from "../userAvatar/UserListItem";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { getSender } from "../../../config/ChatLogics";
-
-
+import {Link} from "react-router-dom";
 
 function SideDrawer() {
   const [search, setSearch] = useState("");
@@ -32,13 +51,12 @@ function SideDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-   const logoutHandler = () => {
-     localStorage.removeItem("userInfo");
-     navigate("/login");
-   };
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/login");
+  };
 
-
-   const handleSearch = async () => {
+  const handleSearch = async () => {
     if (!search) {
       toast({
         title: "Please Enter something in search",
@@ -73,9 +91,9 @@ function SideDrawer() {
         position: "bottom-left",
       });
     }
-   };
+  };
 
-   const accessChat = async (userId) => {
+  const accessChat = async (userId) => {
     console.log(userId);
 
     try {
@@ -102,7 +120,7 @@ function SideDrawer() {
         position: "bottom-left",
       });
     }
-   };
+  };
 
   return (
     <>
@@ -124,14 +142,32 @@ function SideDrawer() {
           </Button>
         </Tooltip>
 
-
-        <Text fontSize="2xl" fontFamily="Work sans">
-          Jchat
-        </Text>
-
+        <Menu>
+          <MenuButton _hover={{ bg: "gray.400" }} borderRadius="md">
+            <Text fontSize="2xl" fontFamily="Work sans">
+              JChat
+            </Text>
+          </MenuButton>
+          <MenuList>
+            <MenuItem>
+              <Link className="link" to="/">
+                JCEducation
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className="link" to="/blogpage">
+                JCinsights
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className="link" to="/Live">
+                JClass
+              </Link>
+            </MenuItem>
+          </MenuList>
+        </Menu>
 
         <div>
-
           <Menu>
             <MenuButton p={1}>
               <NotificationBadge
@@ -157,9 +193,7 @@ function SideDrawer() {
                 </MenuItem>
               ))}
             </MenuList>
-
           </Menu>
-
 
           <Menu>
             <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
