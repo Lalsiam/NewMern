@@ -50,7 +50,8 @@ export default function Navbar() {
       >
         <Tooltip label="Go to Home" hasArrow placement="bottom-end">
           <Link className="link" to="/">
-            Home <ArrowBackIcon />
+            Home
+            <ArrowBackIcon />
           </Link>
         </Tooltip>
 
