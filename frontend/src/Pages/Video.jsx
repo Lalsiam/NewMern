@@ -131,7 +131,7 @@ const Video = () => {
   const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
 
-  const path = useLocation().pathname.split("/")[2]; 
+  const path = useLocation().pathname.split("/")[2];
 
   const [channel, setChannel] = useState({});
 
@@ -170,67 +170,71 @@ const Video = () => {
   const [darkMode, setDarkMode] = useState(true);
 
   return (
-      <>
-  <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-    <Container>
-      <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-      <Main>
-          <Navbar />
-          <Wrapper>
-            <Content>
-              <VideoWrapper>
-                <VideoFrame src={currentVideo && currentVideo.videoUrl} controls />
-              </VideoWrapper>
-              <Title>{currentVideo && currentVideo.title}</Title>
-              <Details>
-                <Info>
-                  {currentVideo && currentVideo.views} views • {format(currentVideo && currentVideo.createdAt)}
-                </Info>
-                <Buttons>
-                  <Button onClick={handleLike}>
-                    {currentVideo && currentVideo.likes?.includes(currentUser?._id) ? (
-                      <FavoriteSharpIcon />
-                    ) : (
-                      <FavoriteBorderSharpIcon />
-                    )}{" "}
-                    {currentVideo && currentVideo.likes?.length}
-                  </Button>
-                  <Button onClick={handleDislike}>
-                    {currentVideo && currentVideo.dislikes?.includes(currentUser?._id) ? (
-                      <ThumbDownIcon />
-                    ) : (
-                      <ThumbDownOffAltOutlinedIcon />
-                    )}{" "}
-                    Dislike
-                  </Button>
-                  
-                </Buttons>
-              </Details>
-              <Hr />
-              <Channel>
-                <ChannelInfo>
-                  <Image src={channel.pic} />
-                  <ChannelDetail>
-                    <ChannelName>{channel.name}</ChannelName>
-                    <ChannelCounter>{channel.subscribers}</ChannelCounter>
-                    <Description>{currentVideo && currentVideo.desc}</Description>
-                  </ChannelDetail>
-                </ChannelInfo>
-                <Subscribe onClick={handleSub}>
-                  {currentUser.subscribedUsers?.includes(channel._id)
-                    ? "ENROLED"
-                    : "ENROLL"}
-                </Subscribe>
-              </Channel>
-              <Hr />
-              <Comment videoId={currentVideo && currentVideo._id} />
-            </Content>
-        <Recommendation tags={currentVideo && currentVideo.tags} />
-        </Wrapper>
-        </Main>
-      </Container>
-    </ThemeProvider>
-      </>
+    <>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <Container>
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Main>
+            <Navbar />
+            <Wrapper>
+              <Content>
+                <VideoWrapper>
+                  <VideoFrame
+                    src={currentVideo && currentVideo.videoUrl}
+                    controls
+                  />
+                </VideoWrapper>
+                <Title>{currentVideo && currentVideo.title}</Title>
+                <Details>
+                  <Info>{format(currentVideo && currentVideo.createdAt)}</Info>
+                  <Buttons>
+                    <Button onClick={handleLike}>
+                      {currentVideo &&
+                      currentVideo.likes?.includes(currentUser?._id) ? (
+                        <FavoriteSharpIcon />
+                      ) : (
+                        <FavoriteBorderSharpIcon />
+                      )}{" "}
+                      {currentVideo && currentVideo.likes?.length}
+                    </Button>
+                    <Button onClick={handleDislike}>
+                      {currentVideo &&
+                      currentVideo.dislikes?.includes(currentUser?._id) ? (
+                        <ThumbDownIcon />
+                      ) : (
+                        <ThumbDownOffAltOutlinedIcon />
+                      )}{" "}
+                      Dislike
+                    </Button>
+                  </Buttons>
+                </Details>
+                <Hr />
+                <Channel>
+                  <ChannelInfo>
+                    <Image src={channel.pic} />
+                    <ChannelDetail>
+                      <ChannelName>{channel.name}</ChannelName>
+                      <ChannelCounter>{channel.subscribers}</ChannelCounter>
+                      <Description>
+                        {currentVideo && currentVideo.desc}
+                      </Description>
+                    </ChannelDetail>
+                  </ChannelInfo>
+                  <Subscribe onClick={handleSub}>
+                    {currentUser.subscribedUsers?.includes(channel._id)
+                      ? "ENROLED"
+                      : "ENROLL"}
+                  </Subscribe>
+                </Channel>
+                <Hr />
+                <Comment videoId={currentVideo && currentVideo._id} />
+              </Content>
+              <Recommendation tags={currentVideo && currentVideo.tags} />
+            </Wrapper>
+          </Main>
+        </Container>
+      </ThemeProvider>
+    </>
   );
 };
 

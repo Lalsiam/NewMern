@@ -9,8 +9,7 @@ import Navbar from "../components/Video/Navbar";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../utils/Theme";
 import { useNavigate } from "react-router-dom";
-
-
+import { useSelector } from "react-redux";
 
 const Contain = styled.div`
   display: flex;
@@ -31,12 +30,10 @@ const Wrapper = styled.div`
   padding: 22px 96px;
 `;
 
-const Home= ({ type }) => {
-
- 
-
-const [darkMode, setDarkMode] = useState(true);
-const [videos, setVideos] = useState([]);
+const Home = ({ type }) => {
+  const [darkMode, setDarkMode] = useState(true);
+  const [videos, setVideos] = useState([]);
+  const { currentVideo } = useSelector((state) => state.video);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -45,6 +42,11 @@ const [videos, setVideos] = useState([]);
     };
     fetchVideos();
   }, [type]);
+
+  const increaseView = async () => {
+    await axios.put(`/api/users/view/${currentVideo._id}`);
+
+  };
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
@@ -55,7 +57,7 @@ const [videos, setVideos] = useState([]);
           <Wrapper>
             <Contain>
               {videos.map((video) => (
-                <Card key={video._id} video={video} />
+                <Card key={video._id} video={video}  />
               ))}
             </Contain>
           </Wrapper>
