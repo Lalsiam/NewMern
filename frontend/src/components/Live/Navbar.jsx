@@ -1,32 +1,72 @@
 import React from "react";
 import { ChatState } from "../../Context/ChatProvider";
+import ProfileModal from "../Chat/miscellaneous/ProfileModal";
+import {
+  Avatar,
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { user } = ChatState();
-  const name = user.pic;
-  return (
-    <div className="bg-black/90">
-      <div className=" h-[5rem] flex items-center justify-between px-4 md:max-w-[90vw] mx-auto">
-        {/* Left */}
-        <div className="flex items-center">
-          <div className="flex w-[3rem] h-[3rem] bg-white rounded-full">
-          <img src={name} alt="img" className="object-cover rounded-full	" />
-          </div>
-          <div className="text-white font-bold">
-            <p className="text-[21px] pl-2">Video Call App</p>
-          </div>
-        </div>
 
-        {/* Right */}
-        <div className="">
-          <ul className="text-white font-bold flex items-center gap-4 cursor-pointer">
-            <li>About Us</li>
-            <li>Product</li>
-            <li>Blogs</li>
-          </ul>
+  const navigate = useNavigate();
+
+  const lHand = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/login");
+  };
+
+  return (
+    <>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        bg="white"
+        w="100%"
+        p="5px 10px 5px 10px"
+        borderWidth="5px"
+      >
+        <Tooltip label="Go home" hasArrow placement="bottom-end">
+          Home
+        </Tooltip>
+
+        <Text fontSize="2xl" fontFamily="Work sans">
+          JLive
+        </Text>
+
+        <div>
+          <Menu>
+            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={user.pic}
+              />
+            </MenuButton>
+
+            <MenuList>
+              <ProfileModal user={user}>
+                <MenuItem>My Profile</MenuItem>
+              </ProfileModal>
+              <MenuDivider />
+              <MenuItem onClick={lHand}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
         </div>
-      </div>
-    </div>
+      </Box>
+    </>
   );
 };
 

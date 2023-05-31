@@ -4,8 +4,9 @@ export default function Header() {
   return (
     <div className="header">
       <div className="headerTitles">
-        <span className="headerTitleSm">*Thoughts and memories*</span>
-        <span className="headerTitleLg">BLOG</span>
+        <span className="headerTitleSm">
+          Share your knowledge. It is a way to achieve immortality.
+        </span>
       </div>
       <img
         className="headerImg"

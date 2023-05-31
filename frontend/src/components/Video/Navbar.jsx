@@ -11,22 +11,17 @@ import Upload from "./Upload";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 import { BellIcon, ChevronDownIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
-
-
 import {
   Avatar,
- 
-  
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
- 
+  Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import ProfileModal from "../Chat/miscellaneous/ProfileModal";
-
-
 
 const Container = styled.div`
   position: sticky;
@@ -77,7 +72,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-left:5px;
+  margin-left: 5px;
 `;
 
 const User = styled.div`
@@ -97,7 +92,7 @@ const User = styled.div`
 
 const Navbar = () => {
   const navigate = useNavigate();
-  
+
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
 
@@ -105,8 +100,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-  localStorage.removeItem("userInfo");
-  navigate("/login");
+    localStorage.removeItem("userInfo");
+    navigate("/login");
   };
 
   return (
@@ -125,7 +120,7 @@ const Navbar = () => {
               <User>
                 <FileUploadOutlinedIcon onClick={() => setOpen(true)} />
               </User>
-              
+
               <Menu>
                 <MenuButton
                   as={Button}

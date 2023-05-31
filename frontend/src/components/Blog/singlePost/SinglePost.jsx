@@ -6,68 +6,52 @@ import axios from "axios";
 import { ChatState } from "../../../Context/ChatProvider";
 import Sidebar from "../Sidebar/Sidebar";
 
-
-
-
 export default function SinglePost() {
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
 
-const location = useLocation();
-const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+  const PF = "http://localhost:5000/images/";
 
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [updateMode, setUpdateMode] = useState(false);
 
-const [post, setPost] = useState({});
-const PF = "http://localhost:5000/images/";
+  const { user } = ChatState();
+  const navigate = useNavigate();
 
-const [title, setTitle] = useState("");
-const [desc, setDesc] = useState("");
-const [updateMode, setUpdateMode] = useState(false);
-
- const { user } = ChatState();
- const navigate = useNavigate();
-
-
- useEffect(() => {
-   const getPost = async () => {
-     const res = await axios.get("/api/blogposts/" + path);
-     setPost(res.data);
-     setTitle(res.data.title);
-     setDesc(res.data.desc);
-   };
-   getPost();
- }, [path]);
-
-
-
-   const handleDelete = async () => {
-     try {
-       await axios.delete(`/api/blogposts/${post._id}`, {
-         data: { name: user.name },
-       });
-       navigate("/blogpage");
-     } catch (err) {}
-   };
-
-
-
-    const handleUpdate = async () => {
-      try {
-        await axios.put(`/api/blogposts/${post._id}`, {
-          name: user.name,
-          title,
-          desc,
-        });
-        setUpdateMode(false);
-      } catch (err) {}
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/api/blogposts/" + path);
+      setPost(res.data);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
     };
+    getPost();
+  }, [path]);
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/blogposts/${post._id}`, {
+        data: { name: user.name },
+      });
+      navigate("/blogpage");
+    } catch (err) {}
+  };
 
-
-
-
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`/api/blogposts/${post._id}`, {
+        name: user.name,
+        title,
+        desc,
+      });
+      setUpdateMode(false);
+    } catch (err) {}
+  };
 
   return (
     <>
-    
       <div className="singlePost">
         <Topbar />
         <div className="singlePostWrapper">
@@ -129,9 +113,8 @@ const [updateMode, setUpdateMode] = useState(false);
             </button>
           )}
         </div>
+        <Sidebar />
       </div>
-      <Sidebar />
-      
     </>
   );
 }
