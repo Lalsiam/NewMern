@@ -101,7 +101,7 @@ const Description = styled.p`
 `;
 
 const Subscribe = styled.button`
-  background-color: #cc1a00;
+  background-color: #28c0f8;
   font-weight: 500;
   color: white;
   border: none;
@@ -214,7 +214,7 @@ const Video = () => {
                     <Image src={channel.pic} />
                     <ChannelDetail>
                       <ChannelName>{channel.name}</ChannelName>
-                      <ChannelCounter>{channel.subscribers}</ChannelCounter>
+                      <ChannelCounter>Students: {channel.subscribers}</ChannelCounter>
                       <Description>
                         {currentVideo && currentVideo.desc}
                       </Description>
