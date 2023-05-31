@@ -1,10 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./topbar.css";
 import { ChatState } from "../../../Context/ChatProvider";
-import { Avatar, Menu, MenuItem, MenuList } from "@mui/material";
-import { MenuButton, MenuDivider, Button } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import ProfileModal from "../../Chat/miscellaneous/ProfileModal";
+
+import { useState } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Input,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Spinner,
+  Text,
+  Tooltip,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { ArrowBackIcon, ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
 
 export default function Topbar() {
   const { user } = ChatState();
@@ -17,40 +38,76 @@ export default function Topbar() {
   };
 
   return (
-    <div className="top">
-      <div className="topLeft">JBLOG</div>
-
-      <div className="topCenter">
-        <ul className="topList">
-          <li className="topListItem">
-            <Link className="link" to="/blogpage">
-              HOME
-            </Link>
-          </li>
-          <Link to="">
-            <li className="topListItem">ABOUT</li>
-          </Link>
-
-          <li className="topListItem">CONTACT</li>
-          <li className="topListItem">
+    <>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        bg="white"
+        w="100%"
+        p="5px 10px 5px 10px"
+        borderWidth="5px"
+      >
+        {window.location.pathname == "/blogpage" ? (
+          <Tooltip label="Create a blog" hasArrow placement="bottom-end">
             <Link className="link" to="/write">
-              WRITE
+              Write <EditIcon />
             </Link>
-          </li>
+          </Tooltip>
+        ) : (
+          <Tooltip label="Go to Home" hasArrow placement="bottom-end">
+            <Link className="link" to="/blogpage">
+              Home <ArrowBackIcon />
+            </Link>
+          </Tooltip>
+        )}
 
-          <li className="topListItem" onClick={logoutHandler}>
-            LOGOUT
-          </li>
-        </ul>
-      </div>
+        <Menu>
+          <MenuButton _hover={{ bg: "gray.400" }} borderRadius="md">
+            <Text fontSize="2xl" fontFamily="Work sans">
+              JCinsights
+            </Text>
+          </MenuButton>
+          <MenuList>
+            <MenuItem>
+              <Link className="link" to="/">
+                JCEducation
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className="link" to="/chatpage">
+                JChat
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className="link" to="/Live">
+                JClass
+              </Link>
+            </MenuItem>
+          </MenuList>
+        </Menu>
 
-      <div className="topRight">
-        <Link className="link" to="">
-          <img className="topImg" src={user.pic} alt="" />
-        </Link>
+        <div>
+          <Menu>
+            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={user.pic}
+              />
+            </MenuButton>
 
-        <i className="topSearchIcon fas fa-search"></i>
-      </div>
-    </div>
+            <MenuList>
+              <ProfileModal user={user}>
+                <MenuItem>My Profile</MenuItem>{" "}
+              </ProfileModal>
+              <MenuDivider />
+              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </Box>
+    </>
   );
 }
