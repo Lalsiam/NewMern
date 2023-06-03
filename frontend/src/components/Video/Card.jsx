@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {format} from "timeago.js"
-import {useEffect } from "react";
+import { format } from "timeago.js";
+import { useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "360px"};
@@ -54,43 +55,34 @@ const Info = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 
-
-
-
 const Card = ({ type, video }) => {
-
- const [channel, setChannel] = useState({});
+  const [channel, setChannel] = useState({});
+  const { currentVideo } = useSelector((state) => state.video);
 
   useEffect(() => {
     const fetchChannel = async () => {
       const res = await axios.get(`/api/users/find/${video.userId}`);
+
       setChannel(res.data);
     };
     fetchChannel();
   }, [video.userId]);
- 
-
-  
-
 
   return (
-    
-            <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
-              <Container type={type}>
-                <Image type={type} src={video.imgUrl} />
-                <Details type={type}>
-                  <ChannelImage type={type} src={channel.pic} />
-                  <Texts>
-                    <Title>{video.title}</Title>
-                    <ChannelName>{channel.name}</ChannelName>
-                    <Info>
-                      {video.views} views, {format(video.createdAt)}{" "}
-                    </Info>
-                  </Texts>
-                </Details>
-              </Container>
-            </Link>
-          
+    <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
+      <Container type={type}>
+        <Image type={type} src={video.imgUrl} />
+        <Details type={type}>
+          <ChannelImage type={type} src={channel.pic} />
+          <Texts>
+            <Title>{video.title}</Title>
+            <ChannelName>
+              {channel.name} <Info>{format(video.createdAt)} </Info>
+            </ChannelName>
+          </Texts>
+        </Details>
+      </Container>
+    </Link>
   );
 };
 

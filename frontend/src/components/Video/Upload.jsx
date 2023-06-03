@@ -19,7 +19,7 @@ const Container = styled.div`
   left: 0;
   background-color: #000000a7;
   display: flex;
-  align-items: center;
+  //align-items: center;
   justify-content: center;
  
 `;

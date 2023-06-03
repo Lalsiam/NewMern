@@ -1,27 +1,38 @@
-import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import { ChatState } from "../../Context/ChatProvider";
 import ProfileModal from "../Chat/miscellaneous/ProfileModal";
+
+import { useState } from "react";
 import {
   Avatar,
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Input,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  Spinner,
   Text,
   Tooltip,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import { ArrowBackIcon, ChevronDownIcon, EditIcon } from "@chakra-ui/icons";
 
-const Navbar = () => {
+export default function Navbar() {
   const { user } = ChatState();
 
   const navigate = useNavigate();
 
-  const lHand = () => {
+  const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     navigate("/login");
   };
@@ -37,17 +48,20 @@ const Navbar = () => {
         p="5px 10px 5px 10px"
         borderWidth="5px"
       >
-        <Tooltip label="Go home" hasArrow placement="bottom-end">
-          Home
+        <Tooltip label="Go to Home" hasArrow placement="bottom-end">
+          <Link className="link" to="/">
+            Home
+            <ArrowBackIcon />
+          </Link>
         </Tooltip>
 
         <Text fontSize="2xl" fontFamily="Work sans">
-          JLive
+          JCLive
         </Text>
 
         <div>
           <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} bg="white">
               <Avatar
                 size="sm"
                 cursor="pointer"
@@ -55,19 +69,9 @@ const Navbar = () => {
                 src={user.pic}
               />
             </MenuButton>
-
-            <MenuList>
-              <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>
-              </ProfileModal>
-              <MenuDivider />
-              <MenuItem onClick={lHand}>Logout</MenuItem>
-            </MenuList>
           </Menu>
         </div>
       </Box>
     </>
   );
-};
-
-export default Navbar;
+}

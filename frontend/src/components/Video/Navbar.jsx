@@ -104,6 +104,12 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search?q=${q}`);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -112,6 +118,7 @@ const Navbar = () => {
             <Input
               placeholder="Search"
               onChange={(e) => setQ(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <SearchOutlinedIcon onClick={() => navigate(`/search?q=${q}`)} />
           </Search>
