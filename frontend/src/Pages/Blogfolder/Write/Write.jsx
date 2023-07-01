@@ -3,10 +3,11 @@ import "./write.css";
 import { ChatState } from "../../../Context/ChatProvider";
 import { useState } from "react";
 import axios from "axios";
+import MDEditor from "@uiw/react-md-editor";
 
 export default function Write() {
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState("**Hello world!!!**");
   const [file, setFile] = useState(null);
 
   const { user } = ChatState();
@@ -66,17 +67,20 @@ export default function Write() {
           </div>
 
           <div className="writeFormGroup">
-            <textarea
-              placeholder="Tell your story..."
-              type="text"
-              className="writeInput writeText"
-              onChange={(e) => setDesc(e.target.value)}
-            ></textarea>
+            <>
+              <MDEditor value={desc} onChange={setDesc} />
+              <MDEditor.Markdown
+                source={desc}
+                style={{ whiteSpace: "pre-wrap" }}
+              />
+            </>
           </div>
+
 
           <button className="writeSubmit" type="submit">
             Publish
           </button>
+
         </form>
       </div>
     </>
