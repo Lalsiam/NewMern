@@ -25,7 +25,7 @@ export default function Sidebar() {
       const res = await axios.get("/api/blogposts/" + path);
       setPost(res.data);
       setTitle(res.data.title);
-      setDesc(res.data.desc);
+      setDesc(res.data.content);
     };
     getPost();
   }, [path]);

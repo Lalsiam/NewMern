@@ -30,7 +30,7 @@ import UserListItem from "../userAvatar/UserListItem";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { getSender } from "../../../config/ChatLogics";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SideDrawer() {
   const [search, setSearch] = useState("");
@@ -142,30 +142,9 @@ function SideDrawer() {
           </Button>
         </Tooltip>
 
-        <Menu>
-          <MenuButton _hover={{ bg: "gray.400" }} borderRadius="md">
-            <Text fontSize="2xl" fontFamily="Work sans">
-              JChat
-            </Text>
-          </MenuButton>
-          <MenuList>
-            <MenuItem>
-              <Link className="link" to="/">
-                JCEducation
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className="link" to="/blogpage">
-                JCinsights
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className="link" to="/Live">
-                JClass
-              </Link>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <Text fontSize="2xl" fontFamily="Work sans">
+          JChat
+        </Text>
 
         <div>
           <Menu>

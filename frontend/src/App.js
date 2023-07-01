@@ -5,9 +5,9 @@ import Home from "./Pages/Home";
 import Video from "./Pages/Video";
 import Search from "./Pages/Search";
 import Chatpage from "./Pages/Chatpage";
-import Blogpage from "./Pages/Blogfolder/Bloghome/Bloghome";
-import Single from "./Pages/Blogfolder/Single/Single";
-import Write from "./Pages/Blogfolder/Write/Write";
+import Blogpage from "./Pages/BlogFolder/Bloghome/Bloghome";
+import Single from "./Pages/BlogFolder/Single/Single";
+import Write from "./Pages/BlogFolder/Write/Write";
 
 import Live from "./Pages/Live/LiveHome";
 import Room from "./Pages/Live/Room";
@@ -30,7 +30,7 @@ function App() {
         <Route path="/blogpage" element={<Blogpage />} />
 
         <Route path="/write" element={<Write />} />
-        
+
         <Route path="/post/:postId" element={<Single />} />
         <Route path="/Live" element={<Live />} />
         <Route path="/room/:roomID" element={<Room />} />

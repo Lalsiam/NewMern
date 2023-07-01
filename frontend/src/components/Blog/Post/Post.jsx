@@ -1,23 +1,15 @@
 import { Link } from "react-router-dom";
 import "./post.css";
+import { Img } from "@chakra-ui/react";
 
 export default function Post({ post }) {
-  const PF = "http://localhost:5000/images/";
   return (
     <>
       <Link to={`/post/${post._id}`} className="link">
         <div className="post">
-          {post.photo && (
-            <img className="postImg" src={PF + post.photo} alt="" />
-          )}
+          <Img src={post.pic} />
 
           <div className="postInfo">
-            <div className="postCats">
-              {post.categories.map((c) => (
-                <span className="postCat">{c.name}</span>
-              ))}
-            </div>
-
             <Link to={`/post/${post._id}`} className="link">
               <span className="postTitle">{post.title}</span>
             </Link>
@@ -29,7 +21,7 @@ export default function Post({ post }) {
               {new Date(post.createdAt).toDateString()}
             </span>
           </div>
-          <p className="postDesc">{post.desc}</p>
+          <p className="postDesc">{post.summary}</p>
         </div>
       </Link>
     </>

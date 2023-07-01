@@ -7,14 +7,15 @@ const PostSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    desc: {
+    summary: {
       type: String,
       required: true,
     },
-    photo: {
+    content: {
       type: String,
-      required: false,
+      required: true,
     },
+
     profilepic: {
       type: String,
       required: false,
@@ -23,14 +24,12 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    categories: {
-      type: Array,
-      required: false,
+    pic: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-
-const Post= mongoose.model("Post", PostSchema);
+const Post = mongoose.model("Post", PostSchema);
 module.exports = Post;

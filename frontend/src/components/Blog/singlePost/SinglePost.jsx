@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChatState } from "../../../Context/ChatProvider";
 import Sidebar from "../Sidebar/Sidebar";
+import { Img } from "@chakra-ui/react";
 
 export default function SinglePost() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
 
   const [post, setPost] = useState({});
-  const PF = "http://localhost:5000/images/";
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -25,7 +25,7 @@ export default function SinglePost() {
       const res = await axios.get("/api/blogposts/" + path);
       setPost(res.data);
       setTitle(res.data.title);
-      setDesc(res.data.desc);
+      setDesc(res.data.content);
     };
     getPost();
   }, [path]);
@@ -44,7 +44,7 @@ export default function SinglePost() {
       await axios.put(`/api/blogposts/${post._id}`, {
         name: user.name,
         title,
-        desc,
+        content: desc,
       });
       setUpdateMode(false);
     } catch (err) {}
@@ -55,9 +55,7 @@ export default function SinglePost() {
       <div className="singlePost">
         <Topbar />
         <div className="singlePostWrapper">
-          {post.photo && (
-            <img src={PF + post.photo} alt="" className="singlePostImg" />
-          )}
+          <Img src={post.pic} />
 
           {updateMode ? (
             <input
@@ -105,7 +103,10 @@ export default function SinglePost() {
               onChange={(e) => setDesc(e.target.value)}
             />
           ) : (
-            <p className="singlePostDesc">{desc}</p>
+            <div
+              className="content"
+              dangerouslySetInnerHTML={{ __html: desc }}
+            />
           )}
           {updateMode && (
             <button className="singlePostButton" onClick={handleUpdate}>
