@@ -70,12 +70,6 @@
   line-height: 25px;
 }
 
-.singlePostDesc::first-letter {
-  margin-left: 20px;
-  font-size: 30px;
-  font-weight: 600;
-}
-
 .singlePostDescInput {
   border: none;
   color: #666;

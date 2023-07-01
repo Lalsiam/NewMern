@@ -62,30 +62,9 @@ export default function Topbar() {
           </Tooltip>
         )}
 
-        <Menu>
-          <MenuButton _hover={{ bg: "gray.400" }} borderRadius="md">
-            <Text fontSize="2xl" fontFamily="Work sans">
-              JCinsights
-            </Text>
-          </MenuButton>
-          <MenuList>
-            <MenuItem>
-              <Link className="link" to="/">
-                JCEducation
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className="link" to="/chatpage">
-                JChat
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className="link" to="/Live">
-                JClass
-              </Link>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <Text fontSize="2xl" fontFamily="Work sans">
+          JCBlog
+        </Text>
 
         <div>
           <Menu>
