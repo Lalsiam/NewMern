@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Live/Navbar";
 
 const Home = () => {
-  // useEffect(() => {
-  // window.location.reload(true)
-  //}, []);
-
   const [RoomCode, setRoomCode] = useState("");
   const navigate = useNavigate();
 
@@ -18,19 +14,14 @@ const Home = () => {
   };
   return (
     <div className=" ">
-      {/* Navbar */}
       <Navbar />
-      {/* Hero */}
+
       <div className="relative h-screen ">
-        {/* Image */}
-        <div className="absolute h-full w-full flex overflow-hidden">
-          {/* <img src={lc} className="object-cover  w-full h-full" /> */}
-        </div>
-        {/* Overlay */}
+        <div className="absolute h-full w-full flex overflow-hidden"></div>
+
         <div className="absolute h-full w-full flex overflow-hidden bg-white"></div>
-        {/* Hero Info */}
+
         <div className="lg:flex lg:pt-20 flex-col items-center justify-center relative z-10 px-6 md:max-w-[90vw] mx-auto">
-          {/* Main */}
           <div className=" flex flex-col items-center justify-center pb-8">
             <h1 className="text-[50px] md:text-[80px] text-black font-bold pt-12">
               JClass
@@ -38,7 +29,6 @@ const Home = () => {
             <p className="text-[26px] text-black  -mt-2">Online lectures</p>
           </div>
 
-          {/* Enter Code */}
           <form
             onSubmit={submitCode}
             className="text-black md:pt-12 flex flex-col items-center justify-center"

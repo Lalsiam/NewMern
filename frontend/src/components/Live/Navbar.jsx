@@ -60,16 +60,7 @@ export default function Navbar() {
         </Text>
 
         <div>
-          <Menu>
-            <MenuButton as={Button} bg="white">
-              <Avatar
-                size="sm"
-                cursor="pointer"
-                name={user.name}
-                src={user.pic}
-              />
-            </MenuButton>
-          </Menu>
+          <Avatar mr={3} size="sm" cursor="pointer" name={user.name} src={user.pic} />
         </div>
       </Box>
     </>
