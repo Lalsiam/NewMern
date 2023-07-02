@@ -7,6 +7,7 @@ import Editor from "../../../Editor";
 import axios from "axios";
 import "./write.css";
 import { v4 } from "uuid";
+import { Img } from "@chakra-ui/react";
 
 import {
   getStorage,
@@ -27,7 +28,7 @@ export default function CreatePost() {
   const [content, setContent] = useState("");
   const [img, setImg] = useState("");
 
-  const [imageUrls, setImageUrls] = useState([]);
+  const [imageUrls, setImageUrls] = useState("");
 
   const uploadFile = () => {
     const storage = getStorage(app);
@@ -65,7 +66,7 @@ export default function CreatePost() {
   };
 
   return (
-    <form onSubmit={createNewPost}>
+    <form class="form__group field" onSubmit={createNewPost}>
       <input
         className="ins"
         type="title"
@@ -80,11 +81,16 @@ export default function CreatePost() {
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
-      <input
-        className="ins"
-        type="file"
-        onChange={(e) => setImg(e.target.files[0])}
-      />
+      {!imageUrls ? (
+        <input
+          className="ins"
+          type="file"
+          onChange={(e) => setImg(e.target.files[0])}
+        />
+      ) : (
+        <Img m={4} h="350px" src={imageUrls} />
+      )}
+
       <Editor value={content} onChange={setContent} />
       <button className="bttn" style={{ marginTop: "5px" }}>
         Create post

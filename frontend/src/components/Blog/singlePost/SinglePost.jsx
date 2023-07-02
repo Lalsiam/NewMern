@@ -55,7 +55,7 @@ export default function SinglePost() {
       <div className="singlePost">
         <Topbar />
         <div className="singlePostWrapper">
-          <Img src={post.pic} />
+          <Img mr={4}  h="650px" src={post.pic} />
 
           {updateMode ? (
             <input

@@ -19,3 +19,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.write-column {
+  background-color: white;
+  height: 250px;
+  width: 100%;
+}
